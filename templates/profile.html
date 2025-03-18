@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- ربط ملفات CSS من مجلد static/css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+      <!-- يمكنك عرض شريط تنقل يظهر فيه اسم المستخدم -->
+      <nav>
+          <ul>
+              <li><a href="{{ url_for('index') }}">الرئيسية</a></li>
+              <li><a href="{{ url_for('profile') }}">{{ user_name }}</a></li>
+              <li><a href="{{ url_for('logout') }}">تسجيل الخروج</a></li>
+          </ul>
+      </nav>
+    </header>
+    <main>
+        <h1>مرحبًا {{ user_name }}</h1>
+        <!-- تفاصيل أخرى للملف الشخصي -->
+    </main>
+</body>
+</html>

@@ -53,10 +53,20 @@ def recommendation():
         return redirect(url_for('show_login'))
     return render_template('recommendation.html')
 
+#صفحة البروفايل
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session:
+        flash('الرجاء تسجيل الدخول أولاً', 'error')
+        return redirect(url_for('show_login'))
+    return render_template('profile.html', user_name=session.get('user_name'))
+
+
 # مسار عرض صفحة تسجيل الدخول
 @app.route('/login', methods=['GET'])
 def show_login():
     return render_template('register.html')
+
 
 # مسار تسجيل الدخول
 @app.route('/login', methods=['POST'])
