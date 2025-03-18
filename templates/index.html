@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- start header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>صدقة</span>
+            </a>
+            <div class="circles">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav">
+                <li><a href="{{ url_for('register') }}" class="active">تسجيل الدخول</a></li>
+                <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+                <li><a href="{{ url_for('projects') }}">مشاريع الخير</a></li>
+                <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleCalculator()">💰 حاسبة الزكاة</button>
+    
+            <!-- المودال -->
+            <div class="modall" id="modall" onclick="closeCalculator(event)">
+                <div class="zakat-calculator" id="calculator" onclick="event.stopPropagation();">
+                    <span class="close" onclick="closeCalculator(event)">&times;</span>
+                    <h4>حاسبة الزكاة</h4>
+                    <input type="number" id="money" placeholder="أدخل المبلغ بالجنية المصري" min="0">
+                    <button onclick="calculateZakat()">احسب</button>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+    
+    <!-- start landing -->
+    <div class="landing">
+        <div class="container">
+            <div class="info">
+                <h1>امنح القليل <br>وساعد الكثير</h1>
+                <p style="max-width: 500px;">همزة الوصل بين المتبرع والمحتاجين</p>
+                <a href="{{ url_for('about') }}" class="btn">تعرف على المزيد</a>
+            </div>
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/landing.jpg') }}" alt="">
+            </div>
+            <div class="content">
+                <div class="shapes">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="social">
+                    <a href="#" class="facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>           
+                    <a href="#" class="twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="instgram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end landing -->
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

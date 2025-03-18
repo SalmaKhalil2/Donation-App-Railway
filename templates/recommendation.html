@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- ربط ملفات CSS من مجلد static -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- start header -->
+  <header>
+    <div class="container">
+      <!-- تحويل رابط الشعار إلى رابط للصفحة الرئيسية -->
+      <a href="{{ url_for('index') }}" class="logo">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <span>صدقة</span>
+      </a>
+      <div class="circles">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="nav">
+        <!-- تحويل الروابط الثابتة إلى روابط ديناميكية باستخدام url_for -->
+        <li><a href="{{ url_for('register') }}" class="active">تسجيل الدخول</a></li>
+        <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+        <li><a href="{{ url_for('projects') }}">مشاريع الخير</a></li>
+        <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+      </ul>
+    </div>
+  </header>
+  <!-- end header -->
+</body>
+</html>
