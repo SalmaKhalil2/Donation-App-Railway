@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+    .boxes{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        direction: rtl;
+        gap: 20px;
+        max-width: 1200px;
+        justify-content: center;
+    }
+    .boxes img{
+        width: 150px;
+        height: 150px;
+        border-radius: 6px;
+    }
+</style>
+</head>
+<body>
+    <!-- start header -->
+    <header>
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>صدقة</span>
+            </a>
+            <div class="circles">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav">
+                <li><a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">تسجيل الدخول </a></li>
+                <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+                <li><a href="{{ url_for('projects') }}" style="background-color: #619d4d; color: white;">مشاريع الخير</a></li>
+                <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleCalculator()">💰 حاسبة الزكاة</button>
+    
+            <!-- المودال -->
+            <div class="modall" id="modall" onclick="closeCalculator(event)">
+                <div class="zakat-calculator" id="calculator" onclick="event.stopPropagation();">
+                    <span class="close" onclick="closeCalculator(event)">&times;</span>
+                    <h4>حاسبة الزكاة</h4>
+                    <input type="number" id="money" placeholder="أدخل المبلغ بالجنية المصري" min="0">
+                    <button onclick="calculateZakat()">احسب</button>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div class="page-landing aid">
+    </div>
+    <div class="donations">
+        <div class="container">
+            <div class="info">
+               <h2>تبرع لمشاريع
+        كفالة يتيم</h2>
+                <p>يمكنك المساهمة بالتبرع من داخل أو خارج مصر من خلال الرسائل النصية أو خدمة فودافون كاش أو البطاقات الائتمانية.</p>
+            </div>
+            <p style="font-size: 40px; font-weight: bold; margin-bottom: 50px; color: #619d4d;">الجمعيات الداعمة:</p>
+            <div class="boxes">
+                <img src="{{ url_for('static', filename='images/رسالة.jpg') }}" alt="">
+                <img src="{{ url_for('static', filename='images/Untitled-4-03-1024x1024.jpg') }}" alt="">
+                <img src="{{ url_for('static', filename='images/6512e2f105fa87f952118347_egyptians homes foundation-p-500.png') }}" alt="">
+                <img src="{{ url_for('static', filename='images/6511cffd9ed37f0b057d8d7f_bel ma2 nahya.png') }}" alt="">
+                <img src="{{ url_for('static', filename='images/6511bce7a8221ad2afe97701_shabab forssan-p-500.png') }}" alt="">
+                <img src="{{ url_for('static', filename='images/6511ce3b3bd5161c7a891e9c_kayan.png') }}" alt="">
+                <img src="{{ url_for('static', filename='images/676ac334f2ec4e74612bbe90_logos (12).png') }}" alt="">
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #f5f5f0; color: #333; text-align: center; padding: 15px; font-size: 14px; bottom: 0; width: 100%; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);">
+        <p>&copy; 2025 منصة <span style="color: #619d4d; font-weight: 800;">صدقة</span> | جميع الحقوق محفوظة</p>
+        <p><a href="#" style="color: #619d4d; text-decoration: none;">الشروط والأحكام</a> | <a href="#" style="color: #619d4d; text-decoration: none;">سياسة الخصوصية</a></p>
+    </footer>
+</body>
+</html>

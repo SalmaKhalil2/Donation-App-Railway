@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        .boxes{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            direction: rtl;
+            gap: 20px;
+            max-width: 1200px;
+            justify-content: center;
+        }
+        .boxes img{
+            width: 150px;
+            height: 150px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- start header -->
+    <header>
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>صدقة</span>
+            </a>
+            <div class="circles">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav">
+                <li><a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">تسجيل الدخول </a></li>
+                <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+                <li><a href="{{ url_for('projects') }}" style="background-color: #619d4d; color: white;">مشاريع الخير</a></li>
+                <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleCalculator()">💰 حاسبة الزكاة</button>
+    
+            <!-- المودال -->
+            <div class="modall" id="modall" onclick="closeCalculator(event)">
+                <div class="zakat-calculator" id="calculator" onclick="event.stopPropagation();">
+                    <span class="close" onclick="closeCalculator(event)">&times;</span>
+                    <h4>حاسبة الزكاة</h4>
+                    <input type="number" id="money" placeholder="أدخل المبلغ بالجنية المصري" min="0">
+                    <button onclick="calculateZakat()">احسب</button>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div class="page-landing ghaza">
+    </div>
+    <div class="donations">
+        <div class="container">
+            <div class="info">
+                <h2>تبرع لمشاريع اغاثة غزة </h2>
+                <p>أهل غزة يواجهون معاناة لا توصف، يحتاجون إلينا الآن أكثر من أي وقت مضى. تبرعك يمكن أن يكون طعامًا لجائع، أو دواءً لمريض، أو مأوى لمن فقد كل شيء. لا تنتظر، كن سببًا في إنقاذ حياة اليوم!
+                تبرّع الآن، ولو بالقليل. القليل يصنع فرقًا.</p>
+            </div>
+            <div class="boxes">
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/بنك.jpeg') }}" alt="">
+                    <h3>اغاثة عاجلة لأهالي غزة مع بنك الطعام</h3>
+                    <p>لنكن يد العون لأهالي غزة في هذه الأوقات الصعبة، ساهم في تلبية الاحتياجات الغذائية الأساسية للأشخاص الذين تضرروا من الصعوبات الأخيرة.</p>
+                    <a href="https://www.efb.eg/programs/3086/aghath-aaagl-lahaly-ghz">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/R.jpg') }}" alt="">
+                    <h3>تبرع لغزة مع جمعية الهلال الأحمر</h3>
+                    <br>
+                    <p>ساهم مع مؤسسة الهلال الأحمر في توفير مواد غذائية أساسية، مهمات إغاثة عاجلة، وأدوية، ومستلزمات طبية ضرورية لأهلنا في غزة.</p>
+                    <a href="https://egyptianrc.org/ar/donation">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" style="height: 200px; width: 200px;">
+                    <h3>اغاثة غزة مع مؤسسة ديارنا للتنمية</h3>
+                    <br>
+                    <p>وساهم الآن في إنقاذ الأرواح وإعادة الأمل ساهم مع مؤسسة ديارنا للتنمية في تقديم الدعم والإغاثة في قطاع غزة</p>
+                    <a href="https://diyarna.org/donation/donate/">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/638335805577411562.jpg') }}" alt="">
+                    <h3>كن سندًا لأهل فلسطين.. دعمك حياة!</h3>
+                    <p>في ظل الظروف الصعبة التي يعيشها أهلنا في فلسطين. نحن في مؤسسة إكرام الخيرية نقدم يد العون من خلال مساعدات إنسانية عاجلة تصل إليهم</p>
+                    <a href="https://ekrameg.org/projects/donate-now">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/Untitled-4-03-1024x1024.jpg') }}" alt="">
+                    <h3>قوافل اغاثية مع مؤسسة صناع الحياة</h3>
+                    <p>كن عونًا لأهل غزة بالدواء و الغذاء في ظل الحصار الكامل وساهم في إنقاذ آلاف المصابين .</p>
+                    <br>
+                    <a href="https://donate.lifemakers.org/Donate/DetailsAr/162">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/OIP.jpg') }}" alt="">
+                    <h3>دعم أهلنا في فلسطين مع مؤسسة حياة كريمة</h3>
+                    <p>ساهم مع مؤسسة حياة كريمة لإنقاذ وتحسين حياة سكان غزة من خلال توفير الرعاية الطبية والغذاء الأساسي.</p>
+                    <a href="https://hayakarima.com/donation/payment/donate/61">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/638476021544846943.png') }}" alt="">
+                    <h3>دعم أهلنا في غزة مع مؤسسة كريمة العلا الخيرية</h3>
+                    <p>ساهم في قافلة مؤسسة كريمة العلا الخيرية لدعم أهالينا في فلسطين ضمن قوافل مصر لإغاثة غزة.</p>
+                    <br>
+                    <a href="https://karimatelola.org/ar/donate/gaza">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/OIP (1).jpg') }}" alt="">
+                    <h3>دعم أهل عزة مع مؤسسة عمار الأرض</h3>
+                    <p>ساعد مع مؤسسة عمار الأرض في تقديم المساعدة الطبية والغذائية لأهالي غزة</p>
+                    <br>
+                    <a href="https://ommarelard.org/donation/aghath-ghz">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/R (1).jpg') }}" alt="">
+                    <h3>اغاثة عاجلة لأهالي غزة مع مؤسسة مصر الخير</h3>
+                    <p>اتبرع مع مؤسسة مصر الخير لدعم غزة لتقديم المساعدات الإنسانية العاجلة والطبية والغذائية</p>
+                    <br>
+                    <a href="https://mekeg.org/ar/causes/support-gaza">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/مؤسسة-الإغاثة-والطوارئ-تعلن-عن-حاجتها-”منسق-ميداني-للمشروعات”.jpeg') }}" alt="">
+                    <h3>الاغاثة العاجلة مؤسسة الاغاثة والطوارئ</h3>
+                    <p>ساهم مع مؤسسة الإغاثة والطوارئ في قافلة الإغاثة لغزة، دعمك يُرسل الاحتياجات الأساسية كالأغذية، والأدوية، والألحفة للمحتاجين هناك.</p>      
+                    <a href="https://reliefeg.org/product/%D9%85%D8%B3%D8%A7%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%83%D8%A9-%D9%84%D8%A7%D9%87%D9%84%D9%86%D8%A7-%D9%81%D9%8A-%D8%BA%D8%B2%D8%A9/">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/الجود.jpg') }}" alt="">
+                    <h3>تبرع لغزة مع مؤسسة الجود الخيرية</h3>
+                    <p>ساهم مع مؤسسة الجود الخيرية في دعم أهل غزة من خلال شاحنة محملة بالمساعدات الإنسانية تذهب إلى غزة.</p>
+                    <a href="https://aljoud-ngo.com/ar/donate_now">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/nour.jpg') }}" alt="">
+                    <h3>اغاثة أهل غزة من خلال مؤسسة مشكاة نور العلم </h3>
+                    <p>نظّمت مؤسسة "مشكاة نور" للعلم والتنوير الثقافية حملة للتبرع بالدم لصالح أشقائنا في فلسـ ـطين ومصـ ـابي 
+                    الاعتـ ـداء على أهالينا في قطاع غزة.</p>
+                    <a href="https://mishkatnour.org/ar/our-news/5/show?utm_source=chatgpt.com">تبرع الان</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #f5f5f0; color: #333; text-align: center; padding: 15px; font-size: 14px; bottom: 0; width: 100%; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);">
+        <p>&copy; 2025 منصة <span style="color: #619d4d; font-weight: 800;">صدقة</span> | جميع الحقوق محفوظة</p>
+        <p><a href="#" style="color: #619d4d; text-decoration: none;">الشروط والأحكام</a> | <a href="#" style="color: #619d4d; text-decoration: none;">سياسة الخصوصية</a></p>
+    </footer>
+</body>
+</html>

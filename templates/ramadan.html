@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- start header -->
+    <header>
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>صدقة</span>
+            </a>
+            <div class="circles">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav">
+                <li><a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">تسجيل الدخول </a></li>
+                <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+                <li><a href="{{ url_for('projects') }}" style="background-color: #619d4d; color: white;">مشاريع الخير</a></li>
+                <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleCalculator()">💰 حاسبة الزكاة</button>
+    
+            <!-- المودال -->
+            <div class="modall" id="modall" onclick="closeCalculator(event)">
+                <div class="zakat-calculator" id="calculator" onclick="event.stopPropagation();">
+                    <span class="close" onclick="closeCalculator(event)">&times;</span>
+                    <h4>حاسبة الزكاة</h4>
+                    <input type="number" id="money" placeholder="أدخل المبلغ بالجنية المصري" min="0">
+                    <button onclick="calculateZakat()">احسب</button>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div class="page-landing ramadan">
+    </div>
+    <div class="donations">
+        <div class="container">
+            <div class="info">
+                <h2>تبرع لمشاريع رمضان وافطار صائم</h2>
+                <p>في شهر الخير، يمكنك المساهمة في توفير وجبات الإفطار للصائمين المحتاجين، ودعم الأسر المتعففة لتعيش فرحة رمضان دون قلق. تبرعك يصنع فرقًا حقيقيًا، فكن جزءًا من الخير وشارك في إدخال السرور على قلوب المحتاجين.</p>
+            </div>
+            <div class="boxes">
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/mersal-foundation.jpg') }}" alt="">
+                    <h3>موائد الرحمن</h3>
+                    <p>موائد الرحمن التي تقدمها مؤسسة مرسال في 5 مستشفيات حكومية لدهم العاملين</p>
+                    <a href="https://mersal-ngo.org/Donation?donationDestID=7313">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/رسالة.jpg') }}" alt="">
+                    <h3>افطار صائم في رمضان 2025 مع جمعية رسالة</h3>
+                    <br>
+                    <p>ساهم في إطعام صائم في شهر رمضان مع جمعية رسالة.</p>
+                    <a href="https://resala.org/donat/">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/بنك.jpeg') }}" alt="" style="height: 200px; width: 200px;">
+                    <h3>زكاة الفطر</h3>
+                    <br>
+                    <p>بنك الطعام المصري يقبل زكاة الفطر و يتم تحويل قيمة الزكاه المدفوعة إلى مواد غذائية جافة ويتم توزيعها على قائمة المحتاجين</p>
+                    <a href="https://diyarna.org/donation/donate/">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/بنك.jpeg') }}" alt="">
+                    <h3>برنامج افطار صائم</h3>
+                    <p>شارك بزكاتك وصدقاتك في ثواب افطار الصائم بقالنا 20 سنة في بنك الطعام المصري بنفطر ملايين الصائمين في شهر</p>
+                    <a href="https://www.efb.eg/programs/2602/brnamg-aftar-saym">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/بنك.jpeg') }}" alt="">
+                    <h3>سهم في مائدة افطار صائم 2025</h3>
+                    <p>ساهم مع بنك الطعام المصري في إفطار ملايين الصائمين خلال شهر رمضان على موائد إفطار الصائم</p>
+                    <br>
+                    <a href="https://www.efb.eg/programs/3066/shm-fy-mayd-aftar">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/orman.jpg') }}" alt="">
+                    <h3>كرتونة رمضان2025 مع جمعية الأورمان</h3>
+                    <p>ساهم في كرتونة رمضان 2025 مع جمعية الأورمان</p>
+                    <a href="https://dar-alorman.com/Donate/Index">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/OIP.jpg') }}" alt="">
+                    <h3>افطار رمضان 2025 مع مؤسسة حياة كريمة</h3>
+                    <p>ساهم في افطار رمضان2025 مع مؤسسة حياة كريمة</p>
+                    <a href="https://hayakarima.com/donation/payment/donate/61">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/OIP.jpg') }}" alt="">
+                    <h3>كرتونة رمضان ب 475ج في مصر 2025 مع مؤسسة حياة كريمة</h3>
+                    <p>مكونات الكرتونة (الأرز – السكر – الزيت – المكرونة – الفول – التمر – السمنة – الشاي – الطحينة – العدس – الدقيق – الشوربة – والمعلبات الأساسية)</p>
+                    <br>
+                    <a href="https://hayakarima.com/donation/alataaam-3-3-3">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/638476021544846943.png') }}" alt="">
+                    <h3>كراتين رمضان 2025 مع كريمة العلا الخيرية</h3>
+                    <p>مكونات الوجبة (3 كيلو أرز - 6 مكرونة - عدس - فول - تمر - زيت - سكر - شعرية)</p>
+                    <a href="https://karimatelola.org/ar/donate/zakaa">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/Untitled-4-03-1024x1024.jpg') }}" alt="">
+                    <h3>وجبات اطعام</h3>
+                    <p>تبرع بزكاتك وصدقتك لإطعام أكثر من 100 ألف مستفيد في شتاء هو الأصعب على آلاف الأسر المستحقة.</p>      
+                    <a href="https://donate.lifemakers.org/Donate/DetailsAr/11">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/R (1).jpg') }}" alt="">
+                    <h3>وجبة لمة عيلة</h3>
+                    <p>تبرُعك هيفطر عيلة بحالها، اتبرع بوجبة لمة العيلة بـ 350 جنيه اللي بتتكون من:
+                        - فرخة كاملة
+                        - كيلو ارز 
+                        - 800 جرام خضار
+                        - 4 ثمرات فاكهة
+                        - تمر
+                    </p>
+                    <a href="https://mekeg.org/ar/products/family-meal">تبرع الان</a>
+                </div>
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/R (1).jpg') }}" alt="">
+                    <h3>افطار صائم</h3>
+                    <p>فرحة صايم تسوى كتير، أتبرع بوجبة إفطار صائم بـ 85 جنيه علشان توصل لملايين الصائمين لحد باب البيت في أبعد محافظات مصر.</p>
+                    <a href="https://mekeg.org/ar/products/iftar-saem">تبرع الان</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #f5f5f0; color: #333; text-align: center; padding: 15px; font-size: 14px; bottom: 0; width: 100%; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);">
+        <p>&copy; 2025 منصة <span style="color: #619d4d; font-weight: 800;">صدقة</span> | جميع الحقوق محفوظة</p>
+        <p><a href="#" style="color: #619d4d; text-decoration: none;">الشروط والأحكام</a> | <a href="#" style="color: #619d4d; text-decoration: none;">سياسة الخصوصية</a></p>
+    </footer>
+</body>
+</html>

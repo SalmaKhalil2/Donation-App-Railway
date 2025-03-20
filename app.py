@@ -40,12 +40,77 @@ def index():
 # صفحة about
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('index.html')
 
 # صفحة المشاريع
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
+@app.route('/ghaza')
+def ghaza():
+    return render_template('ghaza.html')
+
+@app.route('/adha')
+def adha():
+    return render_template('adha.html')
+
+@app.route('/aid')
+def aid():
+    return render_template('aid.html')
+
+@app.route('/bed')
+def bed():
+    return render_template('bed.html')
+
+@app.route('/disabled')
+def disabled():
+    return render_template('disabled.html')
+
+@app.route('/education')
+def education():
+    return render_template('education.html')
+
+@app.route('/etaam')
+def etaam():
+    return render_template('etaam.html')
+
+@app.route('/gharmeen')
+def gharmeen():
+    return render_template('gharmeen.html')
+
+@app.route('/heart')
+def heart():
+    return render_template('heart.html')
+
+@app.route('/marriage')
+def marriage():
+    return render_template('marriage.html')
+
+@app.route('/old')
+def old():
+    return render_template('old.html')
+
+@app.route('/orphan')
+def orphan():
+    return render_template('orphan.html')
+
+@app.route('/ramadan')
+def ramadan():
+    return render_template('ramadan.html')
+
+@app.route('/sarataan')
+def sarataan():
+    return render_template('sarataan.html')
+
+@app.route('/shetaa')
+def shetaa():
+    return render_template('shetaa.html')
+
+@app.route('/water')
+def water():
+    return render_template('water.html')
+
+
 
 # صفحة التوصيات
 @app.route('/recommendation', methods=['GET', 'POST'])
@@ -193,4 +258,4 @@ def forgot_password():
         return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5010)
+    app.run(debug=True)

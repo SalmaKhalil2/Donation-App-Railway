@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- start header -->
+    <header>
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>صدقة</span>
+            </a>
+            <div class="circles">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav">
+                <li><a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">تسجيل الدخول </a></li>
+                <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
+                <li><a href="{{ url_for('projects') }}" style="background-color: #619d4d; color: white;">مشاريع الخير</a></li>
+                <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleCalculator()">💰 حاسبة الزكاة</button>
+    
+            <!-- المودال -->
+            <div class="modall" id="modall" onclick="closeCalculator(event)">
+                <div class="zakat-calculator" id="calculator" onclick="event.stopPropagation();">
+                    <span class="close" onclick="closeCalculator(event)">&times;</span>
+                    <h4>حاسبة الزكاة</h4>
+                    <input type="number" id="money" placeholder="أدخل المبلغ بالجنية المصري" min="0">
+                    <button onclick="calculateZakat()">احسب</button>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div class="page-landing gharmeen">
+    </div>
+    <div class="donations">
+        <div class="container">
+            <div class="info">
+                <h2>تبرع لمشاريع
+                غارمين</h2>
+                <p>هناك من أثقلتهم الديون وأغلقت أمامهم الأبواب، وأصبحوا مهددين بالسجن أو فقدان أسرهم بسبب عجزهم عن السداد. بتبرعك، يمكنك أن ترفع عنهم هذا الحمل، وتعيد إليهم الأمل في بداية جديدة دون خوف أو معاناة. ساهم في فك كربة الغارمين وكن سببًا في تغيير حياتهم للأفضل.</p>
+            </div>
+            <div class="boxes">
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/R (1).jpg') }}" alt="">
+                    <h3>فك كرب الغارمين مع مؤسسة مصر الخير</h3>
+                    <p>اتبرع مع مؤسسة مصر الخير لفك كرب الغارمين من خلال سداد ديونهم</p>
+                    <a href="https://mekeg.org/ar/products/share-in-gharmeen-redemption">تبرع الان</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #f5f5f0; color: #333; text-align: center; padding: 15px; font-size: 14px; bottom: 0; width: 100%; box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);">
+        <p>&copy; 2025 منصة <span style="color: #619d4d; font-weight: 800;">صدقة</span> | جميع الحقوق محفوظة</p>
+        <p><a href="#" style="color: #619d4d; text-decoration: none;">الشروط والأحكام</a> | <a href="#" style="color: #619d4d; text-decoration: none;">سياسة الخصوصية</a></p>
+    </footer>
+</body>
+</html>
