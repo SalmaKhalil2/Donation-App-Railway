@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import sqlite3
 import os
 from flask_bcrypt import Bcrypt
+import ollama 
+
 
 app = Flask(__name__)
 app.secret_key = 'YourSecretKey'  # استخدمي مفتاح أقوى في بيئة الإنتاج
@@ -46,12 +48,31 @@ def projects():
     return render_template('projects.html')
 
 # صفحة التوصيات
-@app.route('/recommendation')
+@app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
     if 'user_id' not in session:
         flash('يجب عليك تسجيل الدخول للوصول إلى صفحة التوصيات.', 'error')
         return redirect(url_for('show_login'))
-    return render_template('recommendation.html')
+    
+    generated_content = None
+    if request.method == 'POST':
+        donation_type = request.form.get("donation_type")
+        amount = request.form.get("amount")
+        duration = request.form.get("duration")
+
+        prompt = f"""
+        لديك حملة تبرع جديدة:
+        - نوع التبرع: {donation_type}
+        - المبلغ المستهدف: {amount} جنيه
+        - المدة: {duration} يومًا
+
+        ما هي التوصيات التي يمكن تقديمها لهذه الحملة لضمان نجاحها؟
+        """
+
+        response = ollama.chat(model="mistral", messages=[{"role": "user", "content": prompt}])
+        generated_content = response['message']['content']
+    
+    return render_template('recommendation.html', generated_content=generated_content)
 
 #صفحة البروفايل
 @app.route('/profile')
@@ -170,8 +191,10 @@ def forgot_password():
             return redirect(url_for('show_login'))
         else:
             flash('البريد الإلكتروني غير مسجل لدينا!', 'error')
-    
-    return render_template('forgot_password.html')
+            return redirect(url_for('forgot_password'))
+    else:
+        flash('ميزة استعادة كلمة المرور غير متاحة حالياً!', 'error')
+        return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

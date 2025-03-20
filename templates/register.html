@@ -34,7 +34,7 @@
 
       <form action="/login" method="POST" onsubmit="return validateLoginForm()">
         <input type="email" id="email" name="email" required 
-               placeholder="اسم المستخدم" 
+               placeholder="البريد الالكترونى"
                value="{{ request.form.get('email', '') }}" 
                oninput="autoCompleteEmail(this)">
         <p id="emailError" style="color: red;"></p> <!-- عرض خطأ البريد الإلكتروني -->
