@@ -76,6 +76,16 @@
       font-size: 16px;
       color: #555;
     }
+    /* تنسيق القائمة المنسدلة فقط */
+    .recommendation select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      background-color: #fff;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -105,7 +115,12 @@
       <h1>إنشاء حملة تبرع</h1>
       <form action="{{ url_for('recommendation') }}" method="post">
         <label for="donation_type">نوع التبرع:</label>
-        <input type="text" id="donation_type" name="donation_type" required>
+        <select id="donation_type" name="donation_type" required>
+          <option value="">-- اختر نوع التبرع --</option>
+          <option value="غزة">غزة</option>
+          <option value="إفطار">إفطار الصائمين</option>
+          <!-- يمكنك إضافة خيارات أخرى إذا لزم الأمر -->
+        </select>
         <label for="amount">المبلغ:</label>
         <input type="number" id="amount" name="amount" required>
         <label for="duration">المدة (بالأيام):</label>
@@ -113,6 +128,9 @@
         <!-- إضافة id للزر ليطابق الكود في authCheck.js -->
         <button type="submit" id="generateCampaignButton">إنشاء الحملة</button>
       </form>
+    </div>
+  </section>
+
       {% if generated_content %}
         <div class="generated-content">
           <h2>نتيجة الحملة:</h2>
