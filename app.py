@@ -37,15 +37,11 @@ init_db()
 def index():
     return render_template('index.html')
 
-# صفحة about
-@app.route('/about')
-def about():
-    return render_template('index.html')
-
 # صفحة المشاريع
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
+
 @app.route('/ghaza')
 def ghaza():
     return render_template('ghaza.html')
@@ -109,8 +105,6 @@ def shetaa():
 @app.route('/water')
 def water():
     return render_template('water.html')
-
-
 
 # صفحة التوصيات
 @app.route('/recommendation', methods=['GET', 'POST'])
