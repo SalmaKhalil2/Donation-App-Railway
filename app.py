@@ -186,32 +186,15 @@ def recommendation():
         # عرض الصفحة بدون توليد أي محتوى
         return render_template('recommendation.html', generated_content=None)
     
-    # عند معالجة طلب POST نتحقق من تسجيل الدخول
+    # التحقق من تسجيل الدخول
     if 'user_id' not in session:
         return jsonify({"error": "يجب عليك تسجيل الدخول أولاً!"}), 401
 
-    generated_content = None
-    if request.method == 'POST':
-        donation_type = request.form.get("donation_type")
-        amount = request.form.get("amount")
-        duration = request.form.get("duration")
-
-        # تحديد الموضوع بناءً على نوع التبرع
-        if "غزة" in donation_type:
-            topic = "غزة"
-        elif "إفطار" in donation_type:
-            topic = "إفطار الصائمين"
-        else:
-            topic = None
-
-        if topic:
-            # استخدام البيانات المخصصة
-            generated_content = f"{data[topic]['title']}\n\n{data[topic]['content']}"
-        else:
-            # إذا لم يتم العثور على موضوع مخصص، نستخدم طرق التبرع العامة
-            generated_content = general_donation_methods
+    # عند معالجة POST (المستخدم مسجل دخول)
+    generated_content = "أولاما اشتغلنا عليه local ومش بيشتغل ع الاستضافة وان لاقينا مشكلة فى ايجاد نموذج تانى دقيق ف العربى ويكون مش محلى"
     
     return render_template('recommendation.html', generated_content=generated_content)
+
 
 # مسار عرض صفحة تسجيل الدخول
 @app.route('/login', methods=['GET'])

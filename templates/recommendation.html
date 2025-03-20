@@ -140,6 +140,15 @@
     </div>
   </section>
 
+
+  <!-- سكريبت النافذة المنبثقة -->
+  <script>
+    window.onload = function() {
+      alert({{ generated_content|tojson }});
+    };
+  </script>
+  
+
   <!-- تعريف متغير isLoggedIn من السيرفر وربط ملف الجافا سكريبت -->
   <script>
     var isLoggedIn = "{{ 'true' if session.get('user_id') else 'false' }}";
