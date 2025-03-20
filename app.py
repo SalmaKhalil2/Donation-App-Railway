@@ -50,10 +50,14 @@ def projects():
 # صفحة التوصيات
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
-    if 'user_id' not in session:
-        flash('يجب عليك تسجيل الدخول للوصول إلى صفحة التوصيات.', 'error')
-        return redirect(url_for('show_login'))
+    if request.method == 'GET':
+        # عرض الصفحة بدون توليد أي محتوى
+        return render_template('recommendation.html', generated_content=None)
     
+    # عند معالجة طلب POST نتحقق من تسجيل الدخول
+    if 'user_id' not in session:
+        return jsonify({"error": "يجب عليك تسجيل الدخول أولاً!"}), 401
+
     generated_content = None
     if request.method == 'POST':
         donation_type = request.form.get("donation_type")
@@ -73,14 +77,6 @@ def recommendation():
         generated_content = response['message']['content']
     
     return render_template('recommendation.html', generated_content=generated_content)
-
-#صفحة البروفايل
-@app.route('/profile')
-def profile():
-    if 'user_id' not in session:
-        flash('الرجاء تسجيل الدخول أولاً', 'error')
-        return redirect(url_for('show_login'))
-    return render_template('profile.html', user_name=session.get('user_name'))
 
 
 # مسار عرض صفحة تسجيل الدخول
@@ -197,4 +193,4 @@ def forgot_password():
         return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5010)

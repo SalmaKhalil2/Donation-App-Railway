@@ -26,11 +26,20 @@
             </div>
             <ul class="nav">
                 <!-- تعديل روابط القوائم لتوجيه المستخدمين للمسارات المناسبة -->
+                {% if session.user_id %}
                 <li>
-                    <a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">
-                        تسجيل الدخول
-                    </a>
+                <a href="{{ url_for('logout') }}" class="logout" style="background-color: white; color: black;">
+                        تسجيل الخروج
+                </a>
                 </li>
+                {% else %}
+                <li>
+                <a href="{{ url_for('register') }}" class="active" style="background-color: white; color: black;">
+                        تسجيل الدخول
+                </a>
+                </li>
+                {% endif %}
+
                 <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
                 <li>
                     <a href="{{ url_for('projects') }}" style="background-color: #619d4d; color: white;">

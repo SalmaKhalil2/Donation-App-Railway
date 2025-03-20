@@ -13,14 +13,6 @@
     <!-- start header -->
     <header>
         <div class="container">
-            
-            <!-- خاص باسم المستخدم اللى سجل دخول -->
-            {% if session.user_id %}
-            <div class="profile-link">
-            <a href="{{ url_for('profile') }}">{{ session.user_name }}</a>
-            </div>
-            {% endif %}
-            <!--  -->
             <a href="#" class="logo">
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <span>صدقة</span>
@@ -30,8 +22,13 @@
                 <div></div>
                 <div></div>
             </div>
+            <i class="fa-solid fa-bars"></i>
             <ul class="nav">
+                {% if session.user_id %}
+                <li><a href="{{ url_for('logout') }}" class="logout">تسجيل الخروج</a></li>
+                {% else %}
                 <li><a href="{{ url_for('register') }}" class="active">تسجيل الدخول</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('recommendation') }}">التوصيات</a></li>
                 <li><a href="{{ url_for('projects') }}">مشاريع الخير</a></li>
                 <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
@@ -48,6 +45,9 @@
                     <p id="result"></p>
                 </div>
             </div>
+            {% if session.user_id %}
+            <i class="fa-solid fa-user"></i>
+             {% endif %}
         </div>
     </header>
     <!-- end header -->
@@ -90,6 +90,30 @@
         </div>
     </div>
     <!-- end landing -->
+     <!-- start about  -->
+     <div class="about" id="about">
+        <div class="container">
+            <div class="about-box">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h2>دعم المشاريع الخيرية</h2>
+                <p>نساعدك في الوصول إلى المشاريع الخيرية التي تحتاج إلى دعم، سواء كانت حملات إغاثية، مشروعات تنموية، أو مؤسسات خيرية موثوقة. يمكنك استكشاف المشاريع، معرفة تفاصيلها، والتبرع بكل سهولة.
+                </p>
+            </div>
+            <div class="about-box">
+                <i class="fa-solid fa-chart-column"></i>
+                <h2>توصيات ذكية للتبرع</h2>
+                <p>باستخدام الذكاء الاصطناعي، نقدم لك اقتراحات مخصصة بناءً على اهتماماتك وسجل تبرعاتك، مما يساعدك في العثور على الفرص الخيرية التي تتماشى مع قيمك وتفضيلاتك.
+                </p>
+            </div>
+            <div class="about-box">
+                <i class="fa-solid fa-credit-card"></i>
+                <h2>التبرع السريع والفعال</h2>
+                <p>نوفر لك تجربة تبرع سلسة وسريعة، مع خيارات دفع مرنة، وتوصيل مباشر للمساعدات إلى المستحقين بأسرع وقت ممكن. التبرع لم يكن يومًا بهذه السهولة!
+                </p>
+            </div>
+        </div>
+    </div>
+   <!-- end about  -->
     
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
